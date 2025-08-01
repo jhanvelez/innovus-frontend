@@ -1,7 +1,9 @@
 import { type Metadata } from 'next'
 import { Inter, Lexend } from 'next/font/google'
 import clsx from 'clsx'
+import { Toaster } from 'react-hot-toast'
 
+import ReduxProvider from '@/providers/ReduxProvider'
 import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
@@ -31,15 +33,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html
-      lang="en"
-      className={clsx(
-        'h-full scroll-smooth bg-white antialiased',
-        inter.variable,
-        lexend.variable,
-      )}
-    >
-      <body className="flex h-full flex-col">{children}</body>
-    </html>
+    <ReduxProvider>
+      <html
+        lang="en"
+        className={clsx(
+          'h-full scroll-smooth bg-white antialiased',
+          inter.variable,
+          lexend.variable,
+        )}
+      >
+        <body className="flex h-full flex-col">
+          <Toaster position="top-right" />
+          {children}
+        </body>
+      </html>
+    </ReduxProvider>
   )
 }

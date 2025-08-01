@@ -1,0 +1,20 @@
+// utils/breadcrumbTitles.ts
+export const breadcrumbTitles: Record<string, string> = {
+  dashboard: 'Inicio',
+  readings: 'Lecturas',
+  billing: 'Facturación',
+  subscribers: 'Suscriptores',
+  properties: 'Predios',
+  meters: 'Medidores',
+  routes: 'Rutas de Lectura',
+  rates: 'Tarifas',
+  'consumption-ranges': 'Rangos de Consumo',
+  subsidies: 'Subsidios',
+  concepts: 'Conceptos de Factura',
+  users: 'Usuarios Internos',
+  employees: 'Empleados',
+  services: 'Servicios',
+  reports: 'Reportes',
+  editar: 'Editar',
+  crear: 'Crear',
+}

@@ -6,13 +6,14 @@ import {
   MenuItem,
   MenuItems,
 } from '@headlessui/react'
-
 import {
   Bars3Icon,
   BellIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useMemo } from 'react';
+
+import { logout } from "@/lib/auth"
 
 interface PropsHeader {
   setSidebarOpen: (sidebarOpen: boolean) => void;
@@ -24,7 +25,7 @@ export function Header({
   const userNavigation = useMemo(() => {
     return [
       { name: 'Mi perfil', href: '#' },
-      { name: 'Cerrar sesión', href: '#' },
+      { name: 'Cerrar sesión', onClick: logout },
     ];
   }, []);
 
@@ -91,14 +92,26 @@ export function Header({
               >
                 {userNavigation.map((item) => (
                   <MenuItem key={item.name}>
-                    <a
-                      href={item.href}
-                      className="block px-3 py-1 text-sm/6 text-gray-900 data-focus:bg-gray-50 data-focus:outline-hidden"
-                    >
-                      {item.name}
-                    </a>
+                    {({ active }) => (
+                      item.href ? (
+                        <a
+                          href={item.href}
+                          className={`block px-3 py-1 text-sm/6 text-gray-900 ${active ? 'bg-gray-50' : ''}`}
+                        >
+                          {item.name}
+                        </a>
+                      ) : (
+                        <button
+                          onClick={item.onClick}
+                          className={`block w-full text-left px-3 py-1 text-sm/6 text-gray-900 hover:cursor-pointer ${active ? 'bg-gray-50' : ''}`}
+                        >
+                          {item.name}
+                        </button>
+                      )
+                    )}
                   </MenuItem>
                 ))}
+
               </MenuItems>
             </Menu>
           </div>

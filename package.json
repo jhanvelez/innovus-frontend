@@ -11,14 +11,18 @@
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@headlessui/react": "^2.2.6",
+    "@heroicons/react": "^2.2.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.1.11",
     "clsx": "^2.1.1",
+    "formik": "^2.4.6",
     "next": "^15",
     "react": "^19",
     "react-dom": "^19",
+    "react-redux": "^9.2.0",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/node": "^24.1.0",

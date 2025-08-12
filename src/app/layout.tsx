@@ -8,11 +8,11 @@ import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - TaxPal',
-    default: 'TaxPal - Accounting made simple for small businesses',
+    template: '%s - Water mider',
+    default: 'Water mider - Innovus',
   },
   description:
-    'Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.',
+    'Monitorea y gestiona el consumo de agua en tiempo real con precisión y eficiencia.',
 }
 
 const inter = Inter({

@@ -3,14 +3,14 @@ import { camelToSnake, snakeToCamel } from "caseparser";
 import { api } from "@/store/api/app.api";
 import { RequestMethod } from "@/utils/RequestMethod";
 
-export const usersApi = api
-  .enhanceEndpoints({ addTagTypes: ["user", "users"] })
+export const metersApi = api
+  .enhanceEndpoints({ addTagTypes: ["meter", "meters"] })
   .injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-      users: builder.query({
+      meters: builder.query({
         query: ({ search = "", page = 1, limit = 10 }) => ({
-          url: `/users`,
+          url: `/meter`,
           method: RequestMethod.GET,
           params: camelToSnake({
             search,
@@ -18,28 +18,28 @@ export const usersApi = api
             limit,
           }),
         }),
-        providesTags: ["users"],
+        providesTags: ["meters"],
         transformResponse: (response: any) => snakeToCamel(response),
       }),
-      user: builder.query({
-        query: () => ({
-          url: `/users/user`,
+      meter: builder.query({
+        query: ({id}) => ({
+          url: `/meter/${id}`,
           method: RequestMethod.GET,
         }),
-        providesTags: ["users"],
+        providesTags: ["meters"],
         transformResponse: (response: any) => snakeToCamel(response.data),
       }),
-      storeUser: builder.mutation({
+      storeMeter: builder.mutation({
         query: (gymData) => ({
-          url: "users/register",
+          url: "meter",
           method: RequestMethod.POST,
           body: gymData,
         }),
       }),
-      updateUser: builder.mutation({
-        invalidatesTags: ["user"],
+      updateMeter: builder.mutation({
+        invalidatesTags: ["meter"],
         query: ({ id, active, name, email }: any) => ({
-          url: `/users/${id}`,
+          url: `/meter/${id}`,
           method: RequestMethod.PUT,
           body: snakeToCamel({
             active,
@@ -48,10 +48,10 @@ export const usersApi = api
           }),
         }),
       }),
-      toggleUser: builder.mutation({
-        invalidatesTags: ["user"],
+      toggleMeter: builder.mutation({
+        invalidatesTags: ["meter"],
         query: ({ id, state }: any) => ({
-          url: `admin/users/state/${id}`,
+          url: `/meter/state/${id}`,
           method: RequestMethod.PUT,
           body: snakeToCamel({
             state
@@ -62,9 +62,9 @@ export const usersApi = api
   });
 
 export const {
-  useUsersQuery,
-  useUserQuery,
-  useStoreUserMutation,
-  useUpdateUserMutation,
-  useToggleUserMutation,
-} = usersApi;
+  useMetersQuery,
+  useMeterQuery,
+  useStoreMeterMutation,
+  useUpdateMeterMutation,
+  useToggleMeterMutation,
+} = metersApi;

@@ -17,4 +17,5 @@ export const breadcrumbTitles: Record<string, string> = {
   reports: 'Reportes',
   editar: 'Editar',
   crear: 'Crear',
+  profile: 'Mi perfil',
 }

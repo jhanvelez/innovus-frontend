@@ -18,7 +18,7 @@ import {
 
 import {
   useLoginMutation
-} from "@/store/api/user.api"
+} from "@/store/api/auth.api"
 
 import { toasts } from '@/lib/toasts'
 
@@ -62,8 +62,6 @@ export default function Login() {
       <h2 className="mt-20 text-lg font-semibold text-gray-900">
         Inicie sesión en su cuenta
       </h2>
-      
-
 
       <Formik
         enableReinitialize
@@ -85,6 +83,8 @@ export default function Login() {
                 value={values.email}
                 onChange={handleChange}
                 required
+                error={!!errors.email}
+                textError={errors.email ?? ''}
               />
               <TextField
                 label="Contraseña"
@@ -94,6 +94,8 @@ export default function Login() {
                 value={values.password}
                 onChange={handleChange}
                 required
+                error={!!errors.password}
+                textError={errors.password ?? ''}
               />
               <div>
                 <Button type="submit" variant="solid" color="blue" className="w-full">

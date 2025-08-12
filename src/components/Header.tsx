@@ -24,7 +24,7 @@ export function Header({
 }: PropsHeader) {
   const userNavigation = useMemo(() => {
     return [
-      { name: 'Mi perfil', href: '#' },
+      { name: 'Mi perfil', href: '/dashboard/profile' },
       { name: 'Cerrar sesión', onClick: logout },
     ];
   }, []);

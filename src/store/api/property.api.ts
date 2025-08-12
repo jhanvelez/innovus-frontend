@@ -3,14 +3,14 @@ import { camelToSnake, snakeToCamel } from "caseparser";
 import { api } from "@/store/api/app.api";
 import { RequestMethod } from "@/utils/RequestMethod";
 
-export const usersApi = api
-  .enhanceEndpoints({ addTagTypes: ["user", "users"] })
+export const propertiesApi = api
+  .enhanceEndpoints({ addTagTypes: ["prooperty", "properties"] })
   .injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-      users: builder.query({
+      properties: builder.query({
         query: ({ search = "", page = 1, limit = 10 }) => ({
-          url: `/users`,
+          url: `/property`,
           method: RequestMethod.GET,
           params: camelToSnake({
             search,
@@ -18,28 +18,28 @@ export const usersApi = api
             limit,
           }),
         }),
-        providesTags: ["users"],
+        providesTags: ["properties"],
         transformResponse: (response: any) => snakeToCamel(response),
       }),
-      user: builder.query({
-        query: () => ({
-          url: `/users/user`,
+      property: builder.query({
+        query: ({id}) => ({
+          url: `/property/${id}`,
           method: RequestMethod.GET,
         }),
-        providesTags: ["users"],
+        providesTags: ["properties"],
         transformResponse: (response: any) => snakeToCamel(response.data),
       }),
-      storeUser: builder.mutation({
+      storeProperty: builder.mutation({
         query: (gymData) => ({
-          url: "users/register",
+          url: "property",
           method: RequestMethod.POST,
           body: gymData,
         }),
       }),
-      updateUser: builder.mutation({
-        invalidatesTags: ["user"],
+      updateProperty: builder.mutation({
+        invalidatesTags: ["prooperty"],
         query: ({ id, active, name, email }: any) => ({
-          url: `/users/${id}`,
+          url: `/property/${id}`,
           method: RequestMethod.PUT,
           body: snakeToCamel({
             active,
@@ -48,10 +48,10 @@ export const usersApi = api
           }),
         }),
       }),
-      toggleUser: builder.mutation({
-        invalidatesTags: ["user"],
+      toggleProoperty: builder.mutation({
+        invalidatesTags: ["prooperty"],
         query: ({ id, state }: any) => ({
-          url: `admin/users/state/${id}`,
+          url: `/property/state/${id}`,
           method: RequestMethod.PUT,
           body: snakeToCamel({
             state
@@ -62,9 +62,9 @@ export const usersApi = api
   });
 
 export const {
-  useUsersQuery,
-  useUserQuery,
-  useStoreUserMutation,
-  useUpdateUserMutation,
-  useToggleUserMutation,
-} = usersApi;
+  usePropertiesQuery,
+  usePropertyQuery,
+  useStorePropertyMutation,
+  useUpdatePropertyMutation,
+  useToggleProopertyMutation,
+} = propertiesApi;

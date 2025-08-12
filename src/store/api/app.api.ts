@@ -10,7 +10,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
     prepareHeaders: (headers: Headers) => {
-      const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("token");
       headers.set("Accept", "application/json");
 
       headers.set("Accept-Language", "es");

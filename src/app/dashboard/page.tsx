@@ -228,14 +228,7 @@ export default function Dashboard() {
                                   <div className="flex-auto">
                                     <div className="flex items-start gap-x-3">
                                       <div className="text-sm/6 font-medium text-gray-900">{transaction.amount}</div>
-                                      <div
-                                        className={classNames(
-                                          statuses[transaction.status],
-                                          'rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset',
-                                        )}
-                                      >
-                                        {transaction.status}
-                                      </div>
+                                      
                                     </div>
                                     {transaction.tax ? (
                                       <div className="mt-1 text-xs/5 text-gray-500">{transaction.tax} tax</div>
@@ -335,14 +328,7 @@ export default function Dashboard() {
                         <dt className="text-gray-500">Amount</dt>
                         <dd className="flex items-start gap-x-2">
                           <div className="font-medium text-gray-900">{client.lastInvoice.amount}</div>
-                          <div
-                            className={classNames(
-                              statuses[client.lastInvoice.status],
-                              'rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset',
-                            )}
-                          >
-                            {client.lastInvoice.status}
-                          </div>
+                          STATUS
                         </dd>
                       </div>
                     </dl>

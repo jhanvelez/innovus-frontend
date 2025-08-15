@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://innovus.com:3001/"
+    ? "https://api.innovusingenieria.com:3001/"
     : "http://localhost:3001/";
 
 export const api = createApi({

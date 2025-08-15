@@ -31,6 +31,7 @@ export default function Register() {
         </Link>{' '}
         to your account.
       </p>
+      {/*
       <form
         action="#"
         className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2"
@@ -40,6 +41,7 @@ export default function Register() {
           name="first_name"
           type="text"
           autoComplete="given-name"
+
           required
         />
         <TextField
@@ -83,6 +85,7 @@ export default function Register() {
           </Button>
         </div>
       </form>
+      */}
     </SlimLayout>
   )
 }

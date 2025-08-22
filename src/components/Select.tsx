@@ -44,7 +44,7 @@ export function Select({
             {...props}
             className="col-start-1 row-start-1 w-full rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 -outline-offset-1 outline-gray-200 focus-visible:outline-1 focus-visible:-outline-offset-1 sm:text-sm/6"
           >
-            <option defaultValue={0} disabled>
+            <option defaultValue={0}>
               -- Seleccione un valor --
             </option>
             {options.map(option => {

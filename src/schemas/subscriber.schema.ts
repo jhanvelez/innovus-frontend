@@ -5,18 +5,14 @@ export const subscriberInitialValues = {
   identification: '',
   category: '',
   nameOwner: '',
-  address: '',
   phone: '',
   email: '',
-  cycle: '',
-  route: '',
 };
 
 export const subscriberValidationSchema = Yup.object({
-  identification: Yup.string().max(20).required(FIELD_REQUIRED_MESSAGE),
+  identification: Yup.number().required(FIELD_REQUIRED_MESSAGE),
   category: Yup.string().max(50).required(FIELD_REQUIRED_MESSAGE),
   nameOwner: Yup.string().max(100).required(FIELD_REQUIRED_MESSAGE),
-  address: Yup.string().max(255).required(FIELD_REQUIRED_MESSAGE),
   phone: Yup.string().nullable(),
   phoneNumber: Yup.string()
     .nullable()
@@ -24,6 +20,4 @@ export const subscriberValidationSchema = Yup.object({
   email: Yup.string().email("Formato del email invalido")
     .max(100)
     .required(FIELD_REQUIRED_MESSAGE),
-  cycle: Yup.string().max(50).required(FIELD_REQUIRED_MESSAGE),
-  route: Yup.string().max(50).required(FIELD_REQUIRED_MESSAGE),
 });

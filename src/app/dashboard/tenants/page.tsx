@@ -5,8 +5,8 @@ import {
   PlusIcon,
   PencilIcon,
 } from '@heroicons/react/24/outline'
-import { toasts } from '@/lib/toasts'
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
+import { Formik } from 'formik'
 
 import {
   TextField,
@@ -17,25 +17,31 @@ import { TableLoader } from "@/components/TableLoader"
 
 // API
 import {
-  useSubscribersQuery,
-  useStoreSubscriberMutation,
-  useUpdateSubscriberMutation,
-  useToggleSubscriberMutation,
-} from "@/store/api/subscriber.api"
+  useTenantQuery,
+  useTenantsQuery,
+  useStoreTenantMutation,
+  useUpdateTenantMutation,
+  useToggleTenantMutation,
+} from "@/store/api/tanant.api"
 
 // Hook
 import { useAuth } from '@/hooks/useAuth'
 
 // Types
-import { Subscriber } from "@/types/Subscriber"
-import { Formik } from 'formik'
+import { Tenant } from "@/types/Tenant"
 
 // Schemas
 import {
-  subscriberInitialValues,
-  subscriberValidationSchema,
-} from "@/schemas/subscriber.schema"
+  tenantInitialValues,
+  tenantValidationSchema,
+} from "@/schemas/tenant.schema"
 import Divider from '@/components/Divider'
+
+// Lib
+import { toasts } from '@/lib/toasts'
+
+// Utils
+import { formatDate } from '@/utils/date'
 
 export default function Susbcribers() {
   const { isAuthenticated } = useAuth()
@@ -43,10 +49,10 @@ export default function Susbcribers() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, refetch: refetchUsers, isLoading } = useSubscribersQuery({ search: "", page: currentPage, limit: 10 });
-  const [storeSubscriber, storeSubscriberResult] = useStoreSubscriberMutation();
-  const [updateSubscriber, updateSubscriberResult] = useUpdateSubscriberMutation();
-  const [toggleSubscriber, toggleSubscriberResult] = useToggleSubscriberMutation();
+  const { data, refetch: refetchUsers, isLoading } = useTenantsQuery({ search: "", page: currentPage, limit: 10 });
+  const [storeSubscriber, storeSubscriberResult] = useStoreTenantMutation();
+  const [updateSubscriber, updateSubscriberResult] = useUpdateTenantMutation();
+  const [toggleSubscriber, toggleSubscriberResult] = useToggleTenantMutation();
 
   // Responses
   useEffect(() => {
@@ -71,9 +77,9 @@ export default function Susbcribers() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold text-gray-900">Subscriptores</h1>
+          <h1 className="text-base font-semibold text-gray-900">Inquilinos (usuarios)</h1>
           <p className="mt-2 text-sm text-gray-700">
-            Listado de todos los usuarios de su cuenta, incluyendo nombre del propietario, correo electrónico y Telefono.
+            Listado de todos los Inquilinos (usuarios) de su cuenta, incluyendo nombre, correo electrónico y Telefono.
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -114,7 +120,13 @@ export default function Susbcribers() {
                     scope="col"
                     className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
                   >
-                    Categoría
+                    Dirección
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                  >
+                    Fecha de inicio del servicio
                   </th>
                   <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-0">
                     <span className="sr-only">Actions</span>
@@ -122,10 +134,10 @@ export default function Susbcribers() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                { data && data?.data.map((user: Subscriber, index: number) => (
+                { data && data?.data.map((user: Tenant, index: number) => (
                   <tr key={index+1}>
                     <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0">
-                      {user.nameOwner}
+                      {user.fullName}
                       <p className="mt-1 truncate text-sm text-gray-500">{user.identification}</p>
                     </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 lg:table-cell">
@@ -134,8 +146,11 @@ export default function Susbcribers() {
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 lg:table-cell">
                       {user.phone}
                     </td>
+                    <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 lg:table-cell">
+                      {user.address}
+                    </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
-                      {user.category}
+                      {formatDate(user.serviceStartDate)}
                     </td>
                     <td className="py-4 pr-4 pl-3 text-start font-medium sm:pr-0">
                       <div className="flex items-center gap-2">
@@ -166,8 +181,8 @@ export default function Susbcribers() {
 
       <Formik
         enableReinitialize
-        initialValues={subscriberInitialValues}
-        validationSchema={subscriberValidationSchema}
+        initialValues={tenantInitialValues}
+        validationSchema={tenantValidationSchema}
         onSubmit={(values, formikHelpers) => {
           storeSubscriber(values);
           formikHelpers.resetForm();
@@ -211,13 +226,13 @@ export default function Susbcribers() {
                           span='Obligatorio'
                         />
                         <TextField
-                          label="Nombre del propietario"
-                          name="nameOwner"
-                          value={values.nameOwner}
+                          label="Nombre del inquilino"
+                          name="fullName"
+                          value={values.fullName}
                           onChange={handleChange}
                           required
-                          error={!!errors.nameOwner}
-                          textError={errors.nameOwner ?? ''}
+                          error={!!errors.fullName}
+                          textError={errors.fullName ?? ''}
                           span='Obligatorio'
                         />
                       </div>
@@ -246,13 +261,23 @@ export default function Susbcribers() {
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <TextField
-                          label="Categoría"
-                          name="category"
-                          value={values.category}
+                          label="Dirección"
+                          name="address"
+                          value={values.address}
                           onChange={handleChange}
+                          error={!!errors.address}
+                          textError={errors.address ?? ''}
+                          span='Opcional'
+                        />
+                        <TextField
+                          label="Fecha de inicio del servicio"
+                          name="serviceStartDate"
+                          type="date"
+                          value={values.serviceStartDate}
+                          onChange={(e) => setFieldValue('serviceStartDate', e.target.value)}
                           required
-                          error={!!errors.category}
-                          textError={errors.category ?? ''}
+                          error={!!errors.serviceStartDate}
+                          textError={errors.serviceStartDate ?? ''}
                           span='Obligatorio'
                         />
                       </div>

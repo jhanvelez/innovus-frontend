@@ -1,11 +1,8 @@
 export interface Subscriber {
   id: string;
-  address: string; 
-  category: string;
-  cycle: string;
-  email: string;
   identification: string;
   nameOwner: string;
+  category: string;
+  email: string;
   phone: string;
-  route: string;
 }

@@ -234,8 +234,8 @@ export default function Meters() {
                   >
                     <div>
                       <div className="max-w-2xl text-start mb-3">
-                        <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">Crear usuario</h2>
-                        <p className="text-sm text-gray-600">Ingrese la información para crear un nuevo usuario.</p>
+                        <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">Registrar medidor</h2>
+                        <p className="text-sm text-gray-600">Ingrese la información para registrar un nuevo medidor.</p>
                       </div>
 
                       <Divider />
@@ -245,6 +245,7 @@ export default function Meters() {
                           <TextField
                             label="Número de serie"
                             name="serialNumber"
+                            span='Obligatrio'
                             value={values.serialNumber}
                             onChange={handleChange}
                             required
@@ -258,6 +259,7 @@ export default function Meters() {
                             onChange={handleChange}
                             error={!!errors.brand}
                             textError={errors.brand ?? ''}
+                            span='Opcional'
                           />
                         </div>
 
@@ -269,6 +271,7 @@ export default function Meters() {
                             onChange={handleChange}
                             error={!!errors.model}
                             textError={errors.model ?? ''}
+                            span='Opcional'
                           />
                           <TextField
                             label="Diámetro"
@@ -279,6 +282,7 @@ export default function Meters() {
                             required
                             error={!!errors.diameter}
                             textError={errors.diameter ?? ''}
+                            span='Obligatrio'
                           />
                         </div>
 
@@ -290,6 +294,7 @@ export default function Meters() {
                             onChange={handleChange}
                             error={!!errors.type}
                             textError={errors.type ?? ''}
+                            span='Opcional'
                           />
                           <TextField
                             label="Fecha de instalación"
@@ -300,6 +305,7 @@ export default function Meters() {
                             required
                             error={!!errors.installationDate}
                             textError={errors.installationDate ?? ''}
+                            span='Obligatrio'
                           />
                         </div>
 
@@ -311,6 +317,7 @@ export default function Meters() {
                             onChange={handleChange}
                             error={!!errors.installer}
                             textError={errors.installer ?? ''}
+                            span='Opcional'
                           />
                           <TextField
                             label="Proveedor"
@@ -319,6 +326,7 @@ export default function Meters() {
                             onChange={handleChange}
                             error={!!errors.provider}
                             textError={errors.provider ?? ''}
+                            span='Opcional'
                           />
                         </div>
 
@@ -332,6 +340,7 @@ export default function Meters() {
                             required
                             error={!!errors.purchaseDate}
                             textError={errors.purchaseDate ?? ''}
+                            span='Obligatrio'
                           />
                           <TextField
                             label="Valor"
@@ -342,6 +351,7 @@ export default function Meters() {
                             required
                             error={!!errors.value}
                             textError={errors.value ?? ''}
+                            span='Obligatrio'
                           />
                         </div>
 

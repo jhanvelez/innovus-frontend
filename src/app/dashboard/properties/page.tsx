@@ -27,6 +27,9 @@ import {
 import {
   useSubscribersQuery,
 } from '@/store/api/subscriber.api'
+import {
+  useTenantsQuery,
+} from '@/store/api/tanant.api'
 
 // Hook
 import { useAuth } from '@/hooks/useAuth'
@@ -34,6 +37,7 @@ import { useAuth } from '@/hooks/useAuth'
 // Types
 import { Property } from "@/types/Property"
 import { Subscriber } from "@/types/Subscriber"
+import { Tenant } from "@/types/Tenant"
 
 // Schemas
 import {
@@ -54,6 +58,7 @@ export default function Properties() {
   const [toggleUser, toggleUserResult] = useToggleProopertyMutation();
 
   const { data: subcripbers  } = useSubscribersQuery({ search: "", page: currentPage, limit: 1000 });
+  const { data: tenants  } = useTenantsQuery({ search: "", page: currentPage, limit: 1000 });
 
   const subcripbersList = useMemo(() => {
     if (!subcripbers) return [];
@@ -65,6 +70,17 @@ export default function Properties() {
       }
     })
   }, [subcripbers]);
+
+  const tenantsList = useMemo(() => {
+    if (!tenants) return [];
+
+    return tenants.data.map((subcripber: Tenant) => {
+      return {
+        value: subcripber.id,
+        label: `${subcripber.fullName} - (${subcripber.identification})`,
+      }
+    })
+  }, [tenants]);
 
   // Responses
   useEffect(() => {
@@ -125,6 +141,18 @@ export default function Properties() {
                   >
                     Dirección
                   </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Ciclo
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Ruta
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Subscriptor
+                  </th>
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                    Inquilino (Usuario)
+                  </th>
                   <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-0">
                     <span className="sr-only">Actions</span>
                   </th>
@@ -138,6 +166,18 @@ export default function Properties() {
                     </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 lg:table-cell">
                       {user.address}
+                    </td>
+                    <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
+                      {user.cycle}
+                    </td>
+                    <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
+                      {user.route}
+                    </td>
+                    <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
+                      {user?.subscriber?.nameOwner}
+                    </td>
+                    <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
+                      {user?.tenant?.fullName}
                     </td>
                     <td className="py-4 pr-4 pl-3 text-start font-medium sm:pr-0">
                       <div className="flex items-center gap-2">
@@ -195,8 +235,8 @@ export default function Properties() {
                 >
                   <div>
                     <div className="max-w-2xl text-start mb-3">
-                      <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">Crear usuario</h2>
-                      <p className="text-sm text-gray-600">Ingrese la información para crear un nuevo usuario.</p>
+                      <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">Registrar predio</h2>
+                      <p className="text-sm text-gray-600">Ingrese la información para registrar un nuevo predio.</p>
                     </div>
 
                     <Divider />
@@ -229,6 +269,29 @@ export default function Properties() {
                         />
                       </div>
 
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <TextField
+                          label="Ciclo"
+                          name="cycle"
+                          value={values.cycle}
+                          onChange={handleChange}
+                          required
+                          error={!!errors.cycle}
+                          textError={errors.cycle ?? ''}
+                          span='Obligatrio'
+                        />
+                        <TextField
+                          label="Ruta"
+                          name="route"
+                          value={values.route}
+                          onChange={handleChange}
+                          required
+                          error={!!errors.route}
+                          textError={errors.route ?? ''}
+                          span='Obligatrio'
+                        />
+                      </div>
+
                       <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
                         <Select
                           label="Subscriptor"
@@ -238,6 +301,16 @@ export default function Properties() {
                           error={!!errors.subscriberId}
                           textError={errors.subscriberId ?? ''}
                           options={subcripbersList}
+                          span='Obligatrio'
+                        />
+                        <Select
+                          label="Inquilino (Usiuario)"
+                          name="tenantId"
+                          value={values.tenantId}
+                          onChange={(val) => setFieldValue("tenantId", val.target.value)}
+                          error={!!errors.tenantId}
+                          textError={errors.tenantId ?? ''}
+                          options={tenantsList}
                           span='Obligatrio'
                         />
                       </div>

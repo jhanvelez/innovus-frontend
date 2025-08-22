@@ -4,6 +4,7 @@ export const breadcrumbTitles: Record<string, string> = {
   readings: 'Lecturas',
   billing: 'Facturación',
   subscribers: 'Suscriptores',
+  tenants: 'Inquilinos (usuarios)',
   properties: 'Predios',
   meters: 'Medidores',
   routes: 'Rutas de Lectura',

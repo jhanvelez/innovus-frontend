@@ -25,6 +25,7 @@ import {
   ChartBarSquareIcon,
   XMarkIcon,
   Cog6ToothIcon,
+  Square3Stack3DIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -80,6 +81,7 @@ export function Sidebar({
           { name: "Usuarios Internos", href: "/dashboard/users", icon: UsersIcon, current: false },
           { name: "Empleados", href: "/dashboard/employees", icon: IdentificationIcon, current: false },
           { name: "Servicios", href: "/dashboard/services", icon: WrenchScrewdriverIcon, current: false },
+          { name: "Ciclos y Rutas", href: "/dashboard/cycles-routes", icon: Square3Stack3DIcon, current: false },
         ],
       },
       {

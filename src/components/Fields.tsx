@@ -54,7 +54,7 @@ export function TextField({
             className={`
               ${formClasses}
               col-start-1 row-start-1 block w-full rounded-md bg-white py-1.5 pr-7 pl-3 -outline-offset-1 focus:outline-1 focus:-outline-offset-1 sm:pr-3 sm:text-sm/6
-              ${error ? `outline-red-300 placeholder:text-red-300 focus:outline-red-600` : ``}
+              ${error ? `outline-red-300  focus:outline-red-600` : ``}
             `}
           />
           {error && (

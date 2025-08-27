@@ -15,6 +15,7 @@ export const breadcrumbTitles: Record<string, string> = {
   users: 'Usuarios Internos',
   employees: 'Empleados',
   services: 'Servicios',
+  'cycles-routes': 'Ciclos y rutas',
   reports: 'Reportes',
   editar: 'Editar',
   crear: 'Crear',

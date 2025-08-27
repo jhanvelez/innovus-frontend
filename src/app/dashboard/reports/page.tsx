@@ -59,9 +59,9 @@ export default function Reports() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold text-gray-900">Lecturas</h1>
+          <h1 className="text-base font-semibold text-gray-900">Reporte</h1>
           <p className="mt-2 text-sm text-gray-700">
-            Listado de todas las lecturas, incluyendo inquilino (usuario), lectura, foto y tipo (evidencia, causal).
+            Genera el reporte de lectura de medidores.
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

@@ -79,23 +79,27 @@ export default function Login() {
                 label="Correo electrónico"
                 name="email"
                 type="email"
+                span='Obligatorio'
                 autoComplete="email"
                 value={values.email}
                 onChange={handleChange}
                 required
                 error={!!errors.email}
                 textError={errors.email ?? ''}
+                placeholder='admin@example.com'
               />
               <TextField
                 label="Contraseña"
                 name="password"
                 type="password"
+                span='Obligatorio'
                 autoComplete="current-password"
                 value={values.password}
                 onChange={handleChange}
                 required
                 error={!!errors.password}
                 textError={errors.password ?? ''}
+                placeholder='**********'
               />
               <div>
                 <Button type="submit" variant="solid" color="blue" className="w-full">

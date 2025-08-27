@@ -47,35 +47,48 @@ export function Sidebar({
 
   const navigation = useMemo(() => {
     return [
-      { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-
-      { name: 'Lecturas', href: '/dashboard/readings', icon: CalendarDaysIcon, current: false },
-      { name: 'Facturación', href: '/dashboard/billing', icon: BanknotesIcon, current: false },
-      { name: 'Suscriptores', href: '/dashboard/subscribers', icon: UserGroupIcon, current: false },
-      { name: 'Inquilinos (usuarios)', href: '/dashboard/tenants', icon: UserIcon, current: false },
-      { name: 'Predios', href: '/dashboard/properties', icon: HomeModernIcon, current: false },
-      { name: 'Medidores', href: '/dashboard/meters', icon: AdjustmentsHorizontalIcon, current: false },
-      { name: 'Rutas de Lectura', href: '/dashboard/routes', icon: MapIcon, current: false },
-
-      { name: 'Tarifas', href: '/dashboard/rates', icon: CurrencyDollarIcon, current: false },
-      { name: 'Rangos de Consumo', href: '/dashboard/consumption-ranges', icon: Bars3BottomLeftIcon, current: false },
-      { name: 'Subsidios', href: '/dashboard/subsidies', icon: ReceiptPercentIcon, current: false },
-      { name: 'Conceptos de Factura', href: '/dashboard/concepts', icon: ClipboardDocumentListIcon, current: false },
-
-      { name: 'Usuarios Internos', href: '/dashboard/users', icon: UsersIcon, current: false },
-      { name: 'Empleados', href: '/dashboard/employees', icon: IdentificationIcon, current: false },
-      { name: 'Servicios', href: '/dashboard/services', icon: WrenchScrewdriverIcon, current: false },
-
-      { name: 'Reportes', href: '/dashboard/reports', icon: ChartBarSquareIcon, current: false },
-    ]
-  }, []);
-
-  const teams = useMemo(() => {
-    return [
-      { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-      { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-      { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
-    ]
+      {
+        section: "General",
+        items: [
+          { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+        ],
+      },
+      {
+        section: "Operación",
+        items: [
+          { name: "Lecturas", href: "/dashboard/readings", icon: CalendarDaysIcon, current: false },
+          { name: "Facturación", href: "/dashboard/billing", icon: BanknotesIcon, current: false },
+          { name: "Suscriptores", href: "/dashboard/subscribers", icon: UserGroupIcon, current: false },
+          { name: "Inquilinos (usuarios)", href: "/dashboard/tenants", icon: UserIcon, current: false },
+          { name: "Predios", href: "/dashboard/properties", icon: HomeModernIcon, current: false },
+          { name: "Medidores", href: "/dashboard/meters", icon: AdjustmentsHorizontalIcon, current: false },
+          { name: "Rutas de Lectura", href: "/dashboard/routes", icon: MapIcon, current: false },
+        ],
+      },
+      {
+        section: "Configuración de facturación",
+        items: [
+          { name: "Tarifas", href: "/dashboard/rates", icon: CurrencyDollarIcon, current: false },
+          { name: "Rangos de Consumo", href: "/dashboard/consumption-ranges", icon: Bars3BottomLeftIcon, current: false },
+          { name: "Subsidios", href: "/dashboard/subsidies", icon: ReceiptPercentIcon, current: false },
+          { name: "Conceptos de Factura", href: "/dashboard/concepts", icon: ClipboardDocumentListIcon, current: false },
+        ],
+      },
+      {
+        section: "Administración",
+        items: [
+          { name: "Usuarios Internos", href: "/dashboard/users", icon: UsersIcon, current: false },
+          { name: "Empleados", href: "/dashboard/employees", icon: IdentificationIcon, current: false },
+          { name: "Servicios", href: "/dashboard/services", icon: WrenchScrewdriverIcon, current: false },
+        ],
+      },
+      {
+        section: "Reportes",
+        items: [
+          { name: "Reportes", href: "/dashboard/reports", icon: ChartBarSquareIcon, current: false },
+        ],
+      },
+    ];
   }, []);
 
   return (
@@ -111,61 +124,34 @@ export function Sidebar({
               </div>
               <nav className="flex flex-1 flex-col">
                 <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                  <li>
-                    <ul role="list" className="-mx-2 space-y-1">
-                      {navigation.map((item) => {
-                        const isActive = pathname === item.href;
-                        return (
-                          <li key={item.name}>
-                            <Link href={item.href} className={classNames(
-                              isActive
-                                ? 'bg-gray-50 text-indigo-600'
-                                : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-                              'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
-                            )}>
-                              <item.icon
-                                className={classNames(
-                                  isActive ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                                  'size-6 shrink-0'
-                                )}
-                              />
-                              {item.name}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </li>
-                  <li>
-                    <div className="text-xs/6 font-semibold text-gray-400">Your teams</div>
-                    <ul role="list" className="-mx-2 mt-2 space-y-1">
-                      {teams.map((team) => (
-                        <li key={team.name}>
-                          <a
-                            href={team.href}
-                            className={classNames(
-                              team.current
-                                ? 'bg-gray-50 text-indigo-600'
-                                : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-                              'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                            )}
-                          >
-                            <span
-                              className={classNames(
-                                team.current
-                                  ? 'border-indigo-600 text-indigo-600'
-                                  : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                                'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
-                              )}
-                            >
-                              {team.initial}
-                            </span>
-                            <span className="truncate">{team.name}</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
+                  {navigation.map((group) => (
+                    <li className='mb-0.5' key={group.section}>
+                      <div className="text-xs/6 font-semibold text-gray-400">{group.section}</div>
+                      <ul role="list" className="-mx-2 space-y-1">
+                        {group.items.map((item) => {
+                          const isActive = pathname === item.href;
+                          return (
+                            <li key={item.name}>
+                              <Link href={item.href} className={classNames(
+                                isActive
+                                  ? 'bg-gray-50 text-indigo-600'
+                                  : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                                'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
+                              )}>
+                                <item.icon
+                                  className={classNames(
+                                    isActive ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                                    'size-6 shrink-0'
+                                  )}
+                                />
+                                {item.name}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </li>
+                  ))}
                   <li className="mt-auto">
                     <a
                       href="#"
@@ -198,61 +184,34 @@ export function Sidebar({
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
-              <li>
-                <ul role="list" className="-mx-2 space-y-1">
-                  {navigation.map((item) => {
-                    const isActive = pathname === item.href;
-                    return (
-                      <li key={item.name}>
-                        <Link href={item.href} className={classNames(
-                          isActive
-                            ? 'bg-gray-50 text-indigo-600'
-                            : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-                          'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
-                        )}>
-                          <item.icon
-                            className={classNames(
-                              isActive ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
-                              'size-6 shrink-0'
-                            )}
-                          />
-                          {item.name}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </li>
-              <li>
-                <div className="text-xs/6 font-semibold text-gray-400">Your teams</div>
-                <ul role="list" className="-mx-2 mt-2 space-y-1">
-                  {teams.map((team) => (
-                    <li key={team.name}>
-                      <a
-                        href={team.href}
-                        className={classNames(
-                          team.current
-                            ? 'bg-gray-50 text-indigo-600'
-                            : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
-                          'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
-                        )}
-                      >
-                        <span
-                          className={classNames(
-                            team.current
-                              ? 'border-indigo-600 text-indigo-600'
-                              : 'border-gray-200 text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600',
-                            'flex size-6 shrink-0 items-center justify-center rounded-lg border bg-white text-[0.625rem] font-medium',
-                          )}
-                        >
-                          {team.initial}
-                        </span>
-                        <span className="truncate">{team.name}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
+              {navigation.map((group) => (
+                <li className='mb-0.5' key={group.section}>
+                  <div className="text-xs/6 font-semibold text-gray-400">{group.section}</div>
+                  <ul role="list" className="-mx-2 space-y-1">
+                    {group.items.map((item) => {
+                      const isActive = pathname === item.href;
+                      return (
+                        <li key={item.name}>
+                          <Link href={item.href} className={classNames(
+                            isActive
+                              ? 'bg-gray-50 text-indigo-600'
+                              : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600',
+                            'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold'
+                          )}>
+                            <item.icon
+                              className={classNames(
+                                isActive ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600',
+                                'size-6 shrink-0'
+                              )}
+                            />
+                            {item.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              ))}
               <li className="mt-auto">
                 <a
                   href="#"

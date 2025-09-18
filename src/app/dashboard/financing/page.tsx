@@ -168,7 +168,7 @@ export default function Rates() {
                       {user.address}
                     </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
-                      {user.cycle}
+                      {user.cycle.name}
                     </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
                       {user.route}
@@ -272,12 +272,12 @@ export default function Rates() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <TextField
                           label="Ciclo"
-                          name="cycle"
-                          value={values.cycle}
+                          name="cycleId"
+                          value={values.cycleId}
                           onChange={handleChange}
                           required
-                          error={!!errors.cycle}
-                          textError={errors.cycle ?? ''}
+                          error={!!errors.cycleId}
+                          textError={errors.cycleId ?? ''}
                           span='Obligatrio'
                         />
                         <TextField

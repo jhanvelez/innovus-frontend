@@ -12,6 +12,7 @@ export const breadcrumbTitles: Record<string, string> = {
   'consumption-ranges': 'Rangos de Consumo',
   subsidies: 'Subsidios',
   concepts: 'Conceptos de Factura',
+  financing: 'Financiación',
   users: 'Usuarios Internos',
   employees: 'Empleados',
   services: 'Servicios',

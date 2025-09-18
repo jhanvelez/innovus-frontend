@@ -21,8 +21,8 @@ export function Select({
 }: Omit<React.ComponentPropsWithoutRef<'select'>, 'id'> & {
   label: string,
   span?: string,
-  error: boolean,
-  textError: string,
+  error?: boolean,
+  textError?: string,
   options: Option[]
 }) {
   let id = useId()

@@ -23,29 +23,21 @@ import {
   useStorePropertyMutation,
   useUpdatePropertyMutation,
   useToggleProopertyMutation,
-} from "@/store/api/property.api";
+} from "@/store/api/property.api"
 import {
   useSubscribersQuery,
-} from '@/store/api/subscriber.api';
+} from '@/store/api/subscriber.api'
 import {
   useTenantsQuery,
-} from '@/store/api/tanant.api';
-import {
-  useCyclesQuery,
-} from "@/store/api/cycles-routes.api";
-import {
-  useStrataQuery,
-} from '@/store/api/stratum.api';
+} from '@/store/api/tanant.api'
 
 // Hook
 import { useAuth } from '@/hooks/useAuth'
 
 // Types
-import { Cycle } from "@/types/Cycle"
-import { Tenant } from "@/types/Tenant"
-import { Stratum } from "@/types/Stratum"
 import { Property } from "@/types/Property"
 import { Subscriber } from "@/types/Subscriber"
+import { Tenant } from "@/types/Tenant"
 
 // Schemas
 import {
@@ -54,24 +46,19 @@ import {
 } from "@/schemas/property.schema"
 import Divider from '@/components/Divider'
 
-export default function Properties() {
+export default function Rates() {
   const { isAuthenticated } = useAuth()
   const [open, setOpen] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data, refetch: refetchProperties, isLoading } = usePropertiesQuery({ search: "", page: currentPage, limit: 10 });
+  const { data, refetch: refetchUsers, isLoading } = usePropertiesQuery({ search: "", page: currentPage, limit: 10 });
   const [storePropety, storePropetyResult] = useStorePropertyMutation();
   const [updateUser, updateUserResult] = useUpdatePropertyMutation();
-  const [togglePropety, togglePropetyResult] = useToggleProopertyMutation();
+  const [toggleUser, toggleUserResult] = useToggleProopertyMutation();
 
   const { data: subcripbers  } = useSubscribersQuery({ search: "", page: currentPage, limit: 1000 });
   const { data: tenants  } = useTenantsQuery({ search: "", page: currentPage, limit: 1000 });
-  const {
-    data: cycles,
-    isLoading: isLoadingCycles
-  } = useCyclesQuery({ search: "", page: currentPage, limit: 10 });
-    const { data: strata  } = useStrataQuery({ search: "", page: currentPage, limit: 1000 });
 
   const subcripbersList = useMemo(() => {
     if (!subcripbers) return [];
@@ -95,28 +82,6 @@ export default function Properties() {
     })
   }, [tenants]);
 
-  const cyclesList = useMemo(() => {
-    if (!cycles) return [];
-
-    return cycles.data.map((cycle: Cycle) => {
-      return {
-        value: cycle.id,
-        label: `${cycle.name}`,
-      }
-    })
-  }, [cycles]);
-
-  const strataList = useMemo(() => {
-    if (!strata) return [];
-
-    return strata.data.map((stratum: Stratum) => {
-      return {
-        value: stratum.id,
-        label: `${stratum.name}`,
-      }
-    })
-  }, [strata]);
-
   // Responses
   useEffect(() => {
     if (storePropetyResult.isSuccess) {
@@ -124,7 +89,7 @@ export default function Properties() {
         "Exito",
         "Registro exitoso"
       )
-      refetchProperties();
+      refetchUsers();
       setOpen(!open);
     }
 
@@ -134,25 +99,15 @@ export default function Properties() {
         "No se realizo el registro"
       )
     }
-  }, [storePropetyResult]);
-
-  useEffect(() => {
-    if (togglePropetyResult.isSuccess) {
-      toasts.success("Éxito", "Estado de la tarifa actualizado exitosamente.")
-      refetchProperties();
-    }
-    if (togglePropetyResult.isError) {
-      toasts.error("Error", "No se pudo actualizar el estado de la tarifa")
-    }
-  }, [togglePropetyResult]);
+  }, [storePropetyResult])
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold text-gray-900">Predios</h1>
+          <h1 className="text-base font-semibold text-gray-900">Financiación</h1>
           <p className="mt-2 text-sm text-gray-700">
-            Listado de todos los predios, incluyendo su ficha catastral y dirección.
+            Listado de todas las financiación, incluyendo su ficha catastral y dirección.
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -187,9 +142,6 @@ export default function Properties() {
                     Dirección
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                    Estrato
-                  </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     Ciclo
                   </th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
@@ -216,10 +168,7 @@ export default function Properties() {
                       {user.address}
                     </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
-                      {user.stratum.name}
-                    </td>
-                    <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
-                      {user.cycle.name}
+                      {user.cycle}
                     </td>
                     <td className="hidden px-3 py-4 text-sm whitespace-nowrap text-gray-500 sm:table-cell">
                       {user.route}
@@ -237,13 +186,6 @@ export default function Properties() {
                         </button>
                         <ToggleField
                           label='Eliminar'
-                          checked={user.active}
-                          onChange={(e) => {
-                            togglePropety({
-                              id: user.id,
-                              state: user.active,
-                            });
-                          }}
                         />
                       </div>
                     </td>
@@ -293,7 +235,7 @@ export default function Properties() {
                 >
                   <div>
                     <div className="max-w-2xl text-start mb-3">
-                      <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">Registrar predio</h2>
+                      <h2 className="text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">Registrar financiacion</h2>
                       <p className="text-sm text-gray-600">Ingrese la información para registrar un nuevo predio.</p>
                     </div>
 
@@ -325,24 +267,17 @@ export default function Properties() {
                           error={!!errors.address}
                           textError={errors.address ?? ''}
                         />
-                        <Select
-                          label="Estrato"
-                          name="stratumId"
-                          value={values.stratumId}
-                          onChange={(val) => setFieldValue("stratumId", val.target.value)}
-                          error={!!errors.stratumId}
-                          textError={errors.stratumId ?? ''}
-                          options={strataList}
-                          span='Obligatrio'
-                        />
-                        <Select
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <TextField
                           label="Ciclo"
-                          name="cycleId"
-                          value={values.cycleId}
-                          onChange={(val) => setFieldValue("cycleId", val.target.value)}
-                          options={cyclesList}
-                          error={!!errors.cycleId}
-                          textError={errors.cycleId ?? ''}
+                          name="cycle"
+                          value={values.cycle}
+                          onChange={handleChange}
+                          required
+                          error={!!errors.cycle}
+                          textError={errors.cycle ?? ''}
                           span='Obligatrio'
                         />
                         <TextField

@@ -26,6 +26,8 @@ import {
   XMarkIcon,
   Cog6ToothIcon,
   Square3Stack3DIcon,
+  DocumentCurrencyDollarIcon,
+  DocumentTextIcon,
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -70,9 +72,11 @@ export function Sidebar({
         section: "Configuración de facturación",
         items: [
           { name: "Tarifas", href: "/dashboard/rates", icon: CurrencyDollarIcon, current: false },
+          { name: "Subsidios y Contribuciones", href: "/dashboard/subsidies", icon: ReceiptPercentIcon, current: false },
           { name: "Rangos de Consumo", href: "/dashboard/consumption-ranges", icon: Bars3BottomLeftIcon, current: false },
-          { name: "Subsidios", href: "/dashboard/subsidies", icon: ReceiptPercentIcon, current: false },
           { name: "Conceptos de Factura", href: "/dashboard/concepts", icon: ClipboardDocumentListIcon, current: false },
+          { name: "Financiación", href: "/dashboard/financing", icon: DocumentCurrencyDollarIcon, current: false },
+          { name: "Convenios", href: "/dashboard/financing", icon: DocumentTextIcon, current: false },
         ],
       },
       {

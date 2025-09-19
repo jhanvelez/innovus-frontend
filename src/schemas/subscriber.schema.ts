@@ -3,10 +3,11 @@ import { FIELD_REQUIRED_MESSAGE } from "@/utils/validations";
 
 export const subscriberInitialValues = {
   identification: '',
-  category: '',
   nameOwner: '',
   phone: '',
   email: '',
+  category: '',
+  stratumId: '',
 };
 
 export const subscriberValidationSchema = Yup.object({
@@ -19,4 +20,5 @@ export const subscriberValidationSchema = Yup.object({
     .matches(/^\+?[0-9\s\-()]{7,20}$/, "Número de telefono invalido"),
   email: Yup.string().email("Formato del email invalido")
     .max(100),
+  stratumId: Yup.string().nullable(),
 });

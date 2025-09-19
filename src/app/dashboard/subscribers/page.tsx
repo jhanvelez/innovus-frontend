@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
+import { Formik } from 'formik'
 import {
   PlusIcon,
   PencilIcon,
@@ -22,14 +23,17 @@ import {
   useStoreSubscriberMutation,
   useUpdateSubscriberMutation,
   useToggleSubscriberMutation,
-} from "@/store/api/subscriber.api"
+} from "@/store/api/subscriber.api";
+import {
+  useStrataQuery,
+} from '@/store/api/stratum.api';
 
 // Hook
 import { useAuth } from '@/hooks/useAuth'
 
 // Types
 import { Subscriber } from "@/types/Subscriber"
-import { Formik } from 'formik'
+import { Stratum } from "@/types/Stratum"
 
 // Schemas
 import {
@@ -66,7 +70,19 @@ export default function Susbcribers() {
         "No se realizo el registro"
       )
     }
-  }, [storeSubscriberResult])
+  }, [storeSubscriberResult]);
+
+  const { data: strata  } = useStrataQuery({ search: "", page: currentPage, limit: 1000 });
+  const strataList = useMemo(() => {
+    if (!strata) return [];
+
+    return strata.data.map((stratum: Stratum) => {
+      return {
+        value: stratum.id,
+        label: `${stratum.name}`,
+      }
+    })
+  }, [strata]);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -254,11 +270,26 @@ export default function Susbcribers() {
                           error={!!errors.category}
                           textError={errors.category ?? ''}
                           options={[
-                            { value: 'subsidio', label: 'Subsidio' },
-                            { value: 'contribucion', label: 'Contribución' },
+                            { value: 'comercial', label: 'Comercial' },
+                            { value: 'industrial', label: 'Industrial' },
+                            { value: 'oficial', label: 'Oficial' },
+                            { value: 'residencial', label: 'Residencial' },
                           ]}
                           span='Obligatorio'
                         />
+
+                        {values.category === 'residencial' && (
+                          <Select
+                            label="Estrato"
+                            name="stratumId"
+                            value={values.stratumId}
+                            onChange={(val) => setFieldValue("stratumId", val.target.value)}
+                            error={!!errors.stratumId}
+                            textError={errors.stratumId ?? ''}
+                            options={strataList}
+                            span='Obligatorio'
+                          />
+                        )}
                       </div>
 
                       <Divider />

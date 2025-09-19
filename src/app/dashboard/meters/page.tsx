@@ -245,7 +245,7 @@ export default function Meters() {
                           <TextField
                             label="Número de serie"
                             name="serialNumber"
-                            span='Obligatrio'
+                            span='Obligatorio'
                             value={values.serialNumber}
                             onChange={handleChange}
                             required
@@ -282,7 +282,7 @@ export default function Meters() {
                             required
                             error={!!errors.diameter}
                             textError={errors.diameter ?? ''}
-                            span='Obligatrio'
+                            span='Obligatorio'
                           />
                         </div>
 
@@ -305,7 +305,7 @@ export default function Meters() {
                             required
                             error={!!errors.installationDate}
                             textError={errors.installationDate ?? ''}
-                            span='Obligatrio'
+                            span='Obligatorio'
                           />
                         </div>
 
@@ -340,7 +340,7 @@ export default function Meters() {
                             required
                             error={!!errors.purchaseDate}
                             textError={errors.purchaseDate ?? ''}
-                            span='Obligatrio'
+                            span='Obligatorio'
                           />
                           <TextField
                             label="Valor"
@@ -351,7 +351,7 @@ export default function Meters() {
                             required
                             error={!!errors.value}
                             textError={errors.value ?? ''}
-                            span='Obligatrio'
+                            span='Obligatorio'
                           />
                         </div>
 
@@ -364,7 +364,7 @@ export default function Meters() {
                             error={!!errors.propertyId}
                             textError={errors.propertyId ?? ''}
                             options={propertiesList}
-                            span='Obligatrio'
+                            span='Obligatorio'
                           />
                         </div>
 

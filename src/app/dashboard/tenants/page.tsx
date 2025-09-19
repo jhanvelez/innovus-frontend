@@ -203,10 +203,10 @@ export default function Susbcribers() {
                   <div>
                     <div className="max-w-2xl text-start mb-3">
                       <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-xl">
-                        Registrar suscriptor
+                        Registrar usuario (inquilino)
                       </h2>
                       <p className="text-sm text-gray-600">
-                        Ingrese la información para registrar un nuevo suscriptor.
+                        Ingrese la información para registrar un nuevo usuario (inquilino).
                       </p>
                     </div>
 

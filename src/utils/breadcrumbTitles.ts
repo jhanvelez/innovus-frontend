@@ -13,6 +13,7 @@ export const breadcrumbTitles: Record<string, string> = {
   subsidies: 'Subsidios',
   concepts: 'Conceptos de Factura',
   financing: 'Financiación',
+  agreements: 'Convenios',
   users: 'Usuarios Internos',
   employees: 'Empleados',
   services: 'Servicios',

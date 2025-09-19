@@ -247,7 +247,7 @@ export default function Rates() {
                           label="Ficha catastral"
                           name="cadastralRecord"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="cadastralRecord"
                           value={values.cadastralRecord}
                           onChange={handleChange}
@@ -259,7 +259,7 @@ export default function Rates() {
                           label="Dirección"
                           name="address"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="address"
                           value={values.address}
                           onChange={handleChange}
@@ -278,7 +278,7 @@ export default function Rates() {
                           required
                           error={!!errors.cycleId}
                           textError={errors.cycleId ?? ''}
-                          span='Obligatrio'
+                          span='Obligatorio'
                         />
                         <TextField
                           label="Ruta"
@@ -288,7 +288,7 @@ export default function Rates() {
                           required
                           error={!!errors.route}
                           textError={errors.route ?? ''}
-                          span='Obligatrio'
+                          span='Obligatorio'
                         />
                       </div>
 
@@ -301,7 +301,7 @@ export default function Rates() {
                           error={!!errors.subscriberId}
                           textError={errors.subscriberId ?? ''}
                           options={subcripbersList}
-                          span='Obligatrio'
+                          span='Obligatorio'
                         />
                         <Select
                           label="Inquilino (Usiuario)"
@@ -311,7 +311,7 @@ export default function Rates() {
                           error={!!errors.tenantId}
                           textError={errors.tenantId ?? ''}
                           options={tenantsList}
-                          span='Obligatrio'
+                          span='Obligatorio'
                         />
                       </div>
 

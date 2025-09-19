@@ -18,6 +18,5 @@ export const subscriberValidationSchema = Yup.object({
     .nullable()
     .matches(/^\+?[0-9\s\-()]{7,20}$/, "Número de telefono invalido"),
   email: Yup.string().email("Formato del email invalido")
-    .max(100)
-    .required(FIELD_REQUIRED_MESSAGE),
+    .max(100),
 });

@@ -14,6 +14,7 @@ import {
 } from '@/components/Fields'
 import { Pagination } from "@/components/Pagination"
 import { TableLoader } from "@/components/TableLoader"
+import { Select } from "@/components/Select"
 
 // API
 import {
@@ -200,7 +201,7 @@ export default function Susbcribers() {
                     <form onSubmit={handleSubmit} className="mt-10 grid grid-cols-1 gap-y-8">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <TextField
-                          label="Identificación"
+                          label="Matrícula"
                           name="identification"
                           type='number'
                           value={values.identification}
@@ -240,19 +241,22 @@ export default function Susbcribers() {
                           onChange={handleChange}
                           error={!!errors.email}
                           textError={errors.email ?? ''}
-                          span='Obligatorio'
+                          span='Opcional'
                         />
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <TextField
-                          label="Categoría"
+                        <Select
+                          label="Typo"
                           name="category"
                           value={values.category}
-                          onChange={handleChange}
-                          required
+                          onChange={(val) => setFieldValue("category", val.target.value)}
                           error={!!errors.category}
                           textError={errors.category ?? ''}
+                          options={[
+                            { value: 'subsidio', label: 'Subsidio' },
+                            { value: 'contribucion', label: 'Contribución' },
+                          ]}
                           span='Obligatorio'
                         />
                       </div>

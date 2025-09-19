@@ -204,7 +204,7 @@ export default function Users() {
                           label="Nombre(s)"
                           name="firstName"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="firstName"
                           value={values.firstName}
                           onChange={handleChange}
@@ -216,7 +216,7 @@ export default function Users() {
                           label="Apellidos"
                           name="lastName"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="lastName"
                           value={values.lastName}
                           onChange={handleChange}
@@ -239,13 +239,13 @@ export default function Users() {
                             {value: 2, label: "NIT"},
                             {value: 3, label: "TI"}
                           ]}
-                          span='Obligatrio'
+                          span='Obligatorio'
                         />
                         <TextField
                           label="N de doocumento"
                           name="documentId"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="documentId"
                           value={values.documentId}
                           onChange={handleChange}
@@ -260,7 +260,7 @@ export default function Users() {
                           label="Dirección"
                           name="address"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="address"
                           value={values.address}
                           onChange={handleChange}
@@ -272,7 +272,7 @@ export default function Users() {
                           label="Número telefonico"
                           name="phoneNumber"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="phoneNumber"
                           value={values.phoneNumber}
                           onChange={handleChange}

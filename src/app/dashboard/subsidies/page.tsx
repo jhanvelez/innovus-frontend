@@ -221,7 +221,7 @@ export default function SubsidyContributionPage() {
                         error={!!errors.stratumId}
                         textError={errors.stratumId ?? ''}
                         options={strataList}
-                        span='Obligatrio'
+                        span='Obligatorio'
                       />
                       <Select
                         label="Typo"
@@ -234,7 +234,7 @@ export default function SubsidyContributionPage() {
                           { value: 'subsidio', label: 'Subsidio' },
                           { value: 'contribucion', label: 'Contribución' },
                         ]}
-                        span='Obligatrio'
+                        span='Obligatorio'
                       />
                     </div>
 

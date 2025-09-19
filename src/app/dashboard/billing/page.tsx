@@ -101,7 +101,7 @@ export default function BillingPage() {
             value={cycleId}
             onChange={(val) => setCycleId(val.target.value)}
             options={cyclesList}
-            span='Obligatrio'
+            span='Obligatorio'
           />
           <Select
             label="Periodo (Mes y Año)"
@@ -119,7 +119,7 @@ export default function BillingPage() {
             }}
 
             options={readingSessionsList}
-            span='Obligatrio'
+            span='Obligatorio'
           />
 
           <div className="bottom-4 mx-auto mt-auto">

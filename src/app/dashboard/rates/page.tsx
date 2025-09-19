@@ -256,7 +256,7 @@ export default function Rates() {
                         error={!!errors.stratumId}
                         textError={errors.stratumId ?? ''}
                         options={strataList}
-                        span='Obligatrio'
+                        span='Obligatorio'
                       />
                       <TextField
                         label="Contribución %"

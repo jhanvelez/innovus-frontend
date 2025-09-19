@@ -221,7 +221,7 @@ export default function CyclesRoutes() {
                           label="Nombre"
                           name="name"
                           type="text"
-                          span='Obligatrio'
+                          span='Obligatorio'
                           autoComplete="name"
                           value={values.name}
                           onChange={handleChange}

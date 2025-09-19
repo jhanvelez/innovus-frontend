@@ -76,7 +76,7 @@ export function Sidebar({
           { name: "Rangos de Consumo", href: "/dashboard/consumption-ranges", icon: Bars3BottomLeftIcon, current: false },
           { name: "Conceptos de Factura", href: "/dashboard/concepts", icon: ClipboardDocumentListIcon, current: false },
           { name: "Financiación", href: "/dashboard/financing", icon: DocumentCurrencyDollarIcon, current: false },
-          { name: "Convenios", href: "/dashboard/financing", icon: DocumentTextIcon, current: false },
+          { name: "Convenios", href: "/dashboard/agreements", icon: DocumentTextIcon, current: false },
         ],
       },
       {
